@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# How to use:
+# findword DIR WORD1
+# or 
+# findword DIR WORD1 WORD2
+
+# Find files that contain certain words within some dir, recursively
+# Very useful in environments where you don't have rgrep or grep -r
+
+for x in $(find $1  | grep -i -E \("\.c|\.pc|\.h|\.sql"\))
+do
+	echo $x 
+	grep -n -i $2 $x 
+	if [[ -n $3 ]]; then
+		grep -n -i $3 $x
+	fi
+done
+

@@ -1,0 +1,415 @@
+VIM - CART�O DE REFER�NCIA 
+===========================
+
+
+Movimentos b�sicos 
+------------------
+
+
+h l k j . . . . . . . . . caracter esq., dir., linha acima, abaixo 
+b w . . . . . . . . . . . palavra/token esquerda, direita 
+ge e  . . . . . . . . . . fim palavra/token esquerda, direita 
+{ } . . . . . . . . . . . come�o par�grafo anterior, posterior 
+( ) . . . . . . . . . . . come�o senten�a anterior, posterior 
+0 gm  . . . . . . . . . . come�o, meio da linha 
+^ $ . . . . . . . . . . . primeiro, �ltimo caracter da linha 
+nG ngg  . . . . . . . . . linha n, padr�o o �ltimo, primeiro 
+n%  . . . . . . . . . . . porcentagem n do arquivo (n deve existir)
+n|  . . . . . . . . . . . coluna n da linha atual 
+% . . . . . . . . . . . . acha pr�ximo par�ntese, colchete, coment., #define 
+nH nL . . . . . . . . . . linha n do topo, base da janela 
+M . . . . . . . . . . . . linha do meio da janela
+
+Inser��o & substitui��o ! modo insert 
+-------------------------------------
+
+i a . . . . . . . . . . . insere antes, depois do cursor 
+I A . . . . . . . . . . . insere no in�cio, fim da linha 
+gi  . . . . . . . . . . . insere texto na �ltima posi��o de iser��o  
+gI  . . . . . . . . . . . insere texto na primeira coluna 
+o O . . . . . . . . . . . abre nova linha abaixo, acima da linha atual 
+rc  . . . . . . . . . . . substitui caracter sob cursor por c 
+grc . . . . . . . . . . . como r, mas sem afetar o layout 
+R   . . . . . . . . . . . substitui caracteres come�ando do cursor 
+gR  . . . . . . . . . . . como R, mas sem afetar o layout 
+cm  . . . . . . . . . . . muda texto do comando de movimento m 
+cc ou S . . . . . . . . . muda linha atual 
+C . . . . . . . . . . . . muda at� o fim da linha 
+s . . . . . . . . . . . . muda um caracter e insere 
+~ . . . . . . . . . . . . muda mai�sc./min�sc. e avan�a cursor 
+g~m . . . . . . . . . . . muda mai�sc./min�sc. do movimento m
+gum gUm . . . . . . . . . texto do movim. m min�sculo, mai�sculo
+<m >m . . . . . . . . . . desloca esq., dir. texto do movimento m 
+n<< n>> . . . . . . . . . desloca n linhas esquerda, direita
+
+
+Elimina��o
+----------
+
+x X . . . . . . . . . . . apaga caracter sob, antes do cursor
+dm  . . . . . . . . . . . apaga texto do comando movimento m
+dd D  . . . . . . . . . . apaga linha atual, at� fim da linha
+J gJ  . . . . . . . . . . junta linha atual com pr�xima, sem espa�o
+:rd [Enter] . . . . . . . apaga r linhas
+:rdx [Enter]  . . . . . . apaga r linhas, p�e registrador x
+xp  . . . . . . . . . . . iverte posicionamento de caracteres           
+dl  . . . . . . . . . . . deleta um caracter sobre o cursor             
+diB . . . . . . . . . . . deleta interior de {}                         
+daB . . . . . . . . . . . deleta interior de {} e {}                    
+dib . . . . . . . . . . . deleta interior de ()                         
+dab . . . . . . . . . . . deleta interior de () e ()                    
+
+b  . . . . . . . . . . . ()                                              
+B  . . . . . . . . . . . {}                                              
+i  . . . . . . . . . . . inner interior                                  
+a  . . . . . . . . . . . all tudo                        
+
+
+
+
+
+Caracteres especiais em padr�es de busca
+----------------------------------------
+
+. ^ $ . . . . . . . . . . qualquer caracter, come�o, fim de linha
+\< \> . . . . . . . . . . in�cio, fim de linha
+[c1-c2] . . . . . . . . . um caracter na faixa c1..c2
+[^c1-c2]. . . . . . . . . um caracter fora da faixa
+\i \I . . . . . . . . . . um identificador, excluindo d�gitos
+\k \K . . . . . . . . . . uma palavra-chave, excluindo d�gitos
+\f \F . . . . . . . . . . um nome de arquivo, excluindo d�gitos
+\p \P . . . . . . . . . . um caracter imprim�vel, excluindo d�gitos
+\s \S . . . . . . . . . . um espa�o em branco, um espa�o n�o-branco
+\e \t \r \b . . . . . . . <esc>, <tab>, [Enter], <bs> 
+\= * \+ . . . . . . . . . combina 0..1, 0..inf, 1..inf de �tomos preced.
+\|  . . . . . . . . . . . separa dois ramos (or = ou l�gico)
+\( \) . . . . . . . . . . agrupa padr�es em um �tomo
+
+
+Deslocamentos em comandos de busca
+----------------------------------
+
+n ou +n . . . . . . . . . linha n abaixo na coluna 1
+-n  . . . . . . . . . . . linha n acima na coluna 1
+e+n e-n . . . . . . . . . n caracteres a dir., esq. do fim da combin.
+s+n s-n . . . . . . . . . n caracteres a dir., esq. do come�o combin.
+;sc . . . . . . . . . . . executa comando de busca sc pr�ximo
+
+
+
+
+Marcas e movimentos
+-------------------
+
+mc  . . . . . . . . . . . marca posi��o atual com marca c 2 [a..Z]
+'c 'C . . . . . . . . . . vai para marca c no arquivo atual, C em qualquer arq.
+'0..9 . . . . . . . . . . vai para �ltima posi��o
+'' '" . . . . . . . . . . vai para posi��o antes salto, na �ltima edi��o
+'[ '] . . . . . . . . . . vai para come�o, fim texto operado anterior
+:marks [Enter]  . . . . . mostra lista de marcas ativas
+:jumps [Enter]  . . . . . mostra lista de saltos
+n^O . . . . . . . . . . . vai para n� posi��o mais velha na lista saltos
+n^I . . . . . . . . . . . vai para n� posi��o mais nova na lista saltos
+
+
+
+
+Mapeamento de teclas & abrevia��oes
+-------------------------------------
+
+:map c e [Enter]  . . . . mapeia c ->  e em modo normal & visual
+:map! c e [Enter] . . . . mapeia c -> e em modo & linha-cmd
+:unmap c [Enter]:unmap! c [Enter] . . . . . . remove mapeamento c
+:mk f [Enter] . . . . . . escreve mapeamentos, ajustes... atuais no arquivo f
+:ab c e [Enter] . . . . . adiciona abrevia��o para c -> e
+:ab c  [Enter]. . . . . . mostra abrevia��o come�ando com c
+:una c [Enter]. . . . . . remove abrevia��o c
+
+
+
+Modo Inser��o
+-------------
+
+^Vc ^Vn . . . . . . . . . insere caracter c literalmente, valor decimal n
+^A  . . . . . . . . . . . insere texto inserido anteriormente
+^@  . . . . . . . . . . . mesmo que ^A e p�ra insert -> modo comando
+^Rx ^R^Rx . . . . . . . . insere conte�do registrador x, literalmente
+^N ^P . . . . . . . . . . completa texto antes, depois do cursor
+^W  . . . . . . . . . . . apaga palavra antes do cursor
+^U  . . . . . . . . . . . apaga todos caracteres inseridos linha atual
+^D ^T . . . . . . . . . . desloca esquerda, direita largura 1 desloc.
+^Kc1c2 ou c1 <- c2  . . . entra d�grafo {c1, c2} 
+^Oc . . . . . . . . . . . executa c em modo comando tempor�rio
+^X^E ^X^Y . . . . . . . . rola acima, abaixo
+<esc> ou ^[ . . . . . . . abandona edi��o ! modo comando
+
+
+
+
+Copiando
+--------
+
+"x  . . . . . . . . . . . usa registrador x para pr�ximo delete, yank, put
+:reg  [Enter] . . . . . . mostra o conte�do de todos os registradores
+:reg x [Enter]  . . . . . mostra conte�do dos registradores x
+ym  . . . . . . . . . . . copia texto do comando de movimento m
+yy ou Y . . . . . . . . . copia texto da linha atual no registrador
+p P . . . . . . . . . . . cola registrador depois, antes da posi��o cursor
+]p [p . . . . . . . . . . como p, P com recuo ajustado
+gp gP . . . . . . . . . . como p, P deixando cursor depois texto novo
+^e  . . . . . . . . . . . copia a linha abaixo na linha atual (- insert mode -) 
+
+
+
+Inser��o Avan�ada
+-----------------
+
+
+g?m . . . . . . . . . . . faz codifica��o rot13 no movimento m
+n^A n^X . . . . . . . . . +n, -n no n�mero sob o cursor
+gqm . . . . . . . . . . . formata linhas do mov. m com largura fixada
+:rce w [Enter]  . . . . . centra linhas na faixa r para largura w
+:rle i [Enter]  . . . . . alinha esq. linhas na faixa r com recuo i
+:rri w [Enter]  . . . . . alinha dir. linhas na faixa r para largura w
+!mc [Enter] . . . . . . . filtra linhas do mov. m atrav�s comando c
+n!!c [Enter]  . . . . . . filtra n linhas atrav�s do comando c
+:r!c [Enter]  . . . . . . filtra faixa de r linhas atrav�s do comando c
+
+
+
+Modo Visual
+-----------
+
+
+v V ^V  . . . . . . . . . come�a/p�ra destaque caract., linhas, bloco
+o . . . . . . . . . . . . troca posi��o do cursor com in�cio do destaque
+gv  . . . . . . . . . . . inicia destaque na area visual anterior
+aw as ap  . . . . . . . . seleciona uma palavra, senten�a, par�grafo
+ab aB . . . . . . . . . . seleciona um bloco ( ), um bloco { }
+
+
+
+Tags
+----
+
+
+:ta t[Enter]  . . . . . . pula para tag t
+:nta[Enter] . . . . . . . pula para na tag mais nova na lista
+^] ^T . . . . . . . . . . pula para tag sob cursor, retorna da tag
+:ts t[Enter]  . . . . . . lista tags que comb. e seleciona uma p/ pular
+:tj t[Enter]  . . . . . . pula para tag ou seleciona uma se v�rias
+:tags[Enter]  . . . . . . mostra lista de tags
+:npo[Enter] :n^T[Enter] . pula atr�s de, para na tag antiga
+:tl[Enter]  . . . . . . . pula para �ltima tag que combina
+^W} :pt t[Enter]  . . . . prev� tag sob cursor, tag t
+^W] . . . . . . . . . . . divide janela e mostra tag sob cursor
+^Wz ou :pc[Enter] . . . . fecha janela visualiza��o tag
+
+
+Rolagem & multi-janela
+----------------------
+
+
+^E ^Y . . . . . . . . . . rola linha acima, abaixo
+^D ^U . . . . . . . . . . rola meia p�gina acima, abaixo
+^F ^B . . . . . . . . . . rola p�gina acima, abaixo
+zt ou z[Enter]  . . . . . p�e linha atual topo da janela
+zz ou z . . . . . . . . . p�e linha atual centro da janela
+zb ou z-  . . . . . . . . p�e linha atual base da janela
+zh zl . . . . . . . . . . rola um caracter a direita, esquerda
+zH zL . . . . . . . . . . rola meia tela a direita, esquerda
+^Ws ou :split[Enter]  . . divide janela em duas
+^Wv ou :vsplit[Enter] . . divide janela em duas
+^Wn ou :new[Enter]  . . . cria nova janela vazia
+^Wo ou :on[Enter] . . . . coloca janela atua em uma tela
+^Wj ^Wk . . . . . . . . . move para janela abaixo, acima
+^Ww ^W^W. . . . . . . . . move para janela abaixo, acima (troca)
+
+
+
+
+
+Comandos Ex ([Enter])
+---------------------
+
+
+:e f  . . . . . . . . . . edita arquivo f, a menos que modificado
+:e! f . . . . . . . . . . edita arq. f sempre (por padr�o rel� atual)
+:wn :wN . . . . . . . . . grava arquivo e edita pr�ximo, anterior
+:n :N . . . . . . . . . . edita arquivo seguinte, anterior na lista
+:rw . . . . . . . . . . . grava faixa r no arquivo atual
+:rw f . . . . . . . . . . grava faixa r no arquivo f
+:rw>>f  . . . . . . . . . adiciona faixa r no arquivo f
+:q :q!  . . . . . . . . . sai e confirma, sai e descarta mudan�as
+:wq ou :x ou ZZ . . . . . grava no arquivo atual e sai
+<up> <down> . . . . . . . chama comandos come�ando com atual
+:r f  . . . . . . . . . . insere conte�do do arquivo f abaixo cursor
+:r! c . . . . . . . . . . insere sa�da comando c abaixo cursor
+:all. . . . . . . . . . . abre janela para cada arquivo na lista argtos.
+:args . . . . . . . . . . mostra a lista de argumentos
+
+
+
+
+
+Comandos desfazer & repetir
+---------------------------
+
+
+u U . . . . . . . . . . . desfaz �ltimo cmd, restaura �ltima linha mudada
+. ^R  . . . . . . . . . . repete �ltimas mudan�as, refaz �ltimo desfazer
+n.(ponto) . . . . . . . . repete �ltimas mudan�as com cont. trocado por n
+qc qC . . . . . . . . . . grava, anexa caracteres digitados no regist. c
+q   . . . . . . . . . . . p�ra de gravar
+@c  . . . . . . . . . . . executa o conte�do do registrador c
+@@  . . . . . . . . . . . repete comando @ anterior
+:@c [Enter] . . . . . . . executa registrador c como comando Ex
+:rg/p/c [Enter] . . . . . executa comando Ex c na faixa r
+                         [onde padr�o p combinar]
+
+
+Movimentos Complexos
+--------------------
+
+
+- + . . . . . . . . . . . linha acima/abaixo no 1� caracter n�o-branco
+B W . . . . . . . . . . . palavra separada por espa�o a esq., a dir.
+gE E  . . . . . . . . . . fim de palavra separada por espa�o a esq., a dir.
+n . . . . . . . . . . . . desce n - 1 linhas no 1� caracter n�o-branco
+g0  . . . . . . . . . . . in�cio da linha screen
+g^ g$ . . . . . . . . . . primeiro, �ltimo caracter da linha screen
+gk gj . . . . . . . . . . linha screen acima, abaixo
+fc Fc . . . . . . . . . . ocorr�ncia seguinte, anterior do caracter c
+tc Tc . . . . . . . . . . antes da ocorr�ncia seguinte, anterior de c
+; , . . . . . . . . . . . repete �ltimo fFtT, na dire��o oposta
+[[ ]] . . . . . . . . . . come�o de se��o atr�s, a frente
+[] ][ . . . . . . . . . . fim de se��o atr�s, a frente
+[( ]) . . . . . . . . . . (, ) n�o fechado atr�s, a frente
+[{ [} . . . . . . . . . . {, } n�o fechado atr�s, a frente
+[m ]m . . . . . . . . . . come�o, fim de java method atr�s, a frente
+[# ]# . . . . . . . . . . #if, #else, #endif n�o fechado atr�s, a frente
+[* ]* . . . . . . . . . . come�o, fim de /* */ atr�s, a frente
+
+
+
+
+
+Busca & substitui��o
+-----------------------
+
+
+/s [Enter] ?s [Enter] . . procura a frente, atr�s por s
+/s/o [Enter] ?s?o [Enter] . . .procura s atr�s, frente com desloc. o
+n ou / [Enter]  . . . . . repete �ltima busca a frente
+N ou ? [Enter]  . . . . . repete �ltima busca atr�s
+# * . . . . . . . . . . . procura atr�s, a frente palavra sob o cursor
+g# g* . . . . . . . . . . o mesmo, mas busca tamb�m parcial
+gd gD . . . . . . . . . . defini��o local, global de s�mbolo sob cursor
+:rs/f/t/x [Enter] . . . . substitui f por t na faixa r
+        [x : g-todas as ocorr�ncias, c-confirma mudan�as]
+:rs x [Enter] . . . . . . repete substitui��o com novos r &
+
+
+
+
+Faixas Ex
+---------
+
+
+, ; . . . . . . . . . . . separa dois n�meros linhas, def. para 1a linha
+n . . . . . . . . . . . . um n�mero de linha n absoluto
+. $ . . . . . . . . . . . linha atual, �ltima linha no arquivo
+% * . . . . . . . . . . . arquivo todo, area visual
+'t  . . . . . . . . . . . posi��o da marca t
+/p/ ?p? . . . . . . . . . linha seguinte, anterior onde p combina
++n -n . . . . . . . . . . +n, -n at� n�mero linha precedente
+
+
+
+
+Miscel�nea
+----------
+
+
+:sh [Enter] :!c [Enter] . come�a shell, executa cmdo. c em shell
+K . . . . . . . . . . . . procura palavra[Enter]chave sob cursor com man
+:make [Enter] . . . . . . come�a make, l� erros e vai ao primeiro
+:cn [Enter] :cp [Enter] . mostra erro seguinte, anterior
+:cl [Enter] :cf [Enter] . lista erros, l� erros do arquivo
+^L ^G . . . . . . . . . . redesenha tela, mostra nome arquivo e posi��o
+g^G . . . . . . . . . . . mostra coluna cursor, linha e posi��o caracter
+ga  . . . . . . . . . . . mostra valor ASCII do caracter sob cursor
+gf  . . . . . . . . . . . abre arquivo cujo nome est� sob cursor
+:redir>f [Enter]  . . . . redireciona sa�da para arquivo f
+^@ ^K ^_ \  . . . . . . . teclas sem uso, dispon�veis para mape
+q:  . . . . . . . . . . . edita o hist�rico da linha de comandos  
+q?  . . . . . . . . . . . edita o hist�rico de pesquisa 
+q/  . . . . . . . . . . . edita o hist�rico de pesquisa 
+
+
+)  n)              move o cursor para o in�cio da pr�xima frase adjacente
+(  n(              move o cursor para o in�cio da frase anterior adjacente
+}  n}              move o cursor para o in�cio do pr�ximo par�grafo adjacente
+{  n{              move o cursor para o in�cio do par�grafo anterior adjacente
+
+d)  nd)            deleta a pr�xima frase adjacente
+d}  nd}            deleta o pr�ximo par�grafo adjacente
+d(  nd(            deleta a frase anterior adjacente
+d{  nd{            deleta o par�grafo anterior adjacente
+
+dfc dnfc  delete o texto at� encontrar o primeiro caracter c ap�s
+          a posi��o inicial do cursr, incluindo o caracter
+
+dFc dnFc  delete o texto at� encontrar o primeiro caracter c
+          anterior a posi��o inicial do cursr, incluindo o caracter
+
+dtc dntc  delete o texto at� encontrar o primeiro caracter c ap�s a
+          posi��o inicial do cursr, excluindo o caracter
+
+dTc dnTc  delete o texto at� encontrar o primeiro caracter c
+          anterior a posi��o inicial do cursr, excluindo o caracter
+
+d/pattern<ret> delete text from current pos to first occurrence
+					of text matching pattern forward to EOF (not attern ). If
+					search wraps to BOF before matched, deletion begins with
+					pattern t is removed up to, but not including, sor pos.
+
+d?pattern<ret> delete text from current pos to first occurrence of
+					text matching pattern backward to BOF (including excluding
+					cursor pos). If search o EOF before pattern is matched,
+					deletion current pos and continue up to, but ding, the matching
+					pattern
+
+
+
+ O comando append
+ ----------------
+ 
+  Um recurso muito interessante para adicionar texto
+  na linha ln+1 � utilizar o comando append
+  onde basta voc� especificar `ln` linha e  escrever
+  a menssagem a ser inserida em seguida
+  do comando
+    :ln append
+    \menssagem
+    .
+
+
+ aten��o pois o ponto incerra o comando
+
+
+O comando insert
+----------------
+  Um recurso muito interessante para adicionar texto
+  na linha ln   � utilizar o comando insert
+  onde basta voc� especificar `ln` linha e  escrever
+  a menssagem a ser inserida em seguida
+  do comando
+    :ln insert
+    \menssagem
+    .
+ aten��o pois o ponto incerra o comando
+
+
+=============================================================================
+# vim:tw=78:ts=3:ft=help:norl:
