@@ -1,19 +1,29 @@
 #!/bin/sh
 
 # How to use:
-# findword DIR WORD1
+# findword DIR WORD1 [WORD2 .. WORDN]
 # or 
-# findword DIR WORD1 WORD2
+# findword DIR --pattern "\*.c|\*.pc" WORD1 [WORD2 .. WORDN]
 
 # Find files that contain certain words within some dir, recursively
 # Very useful in environments where you don't have rgrep or grep -r
 
-for x in $(find $1  | grep -i -E \("\.c|\.pc|\.h|\.sql"\))
-do
-	echo $x 
-	grep -n -i $2 $x 
-	if [[ -n $3 ]]; then
-		grep -n -i $3 $x
-	fi
-done
 
+
+DIR=$1
+shift 1
+if [[ $1 = "--pattern" ]]
+then
+        pattern=$2
+        shift 2
+else
+        pattern="\.c|\.pc|\.h|\.sql"
+fi
+for x in $(find $DIR  | grep -i -E \($pattern\))
+do
+        echo $x
+        for i in $@
+        do
+                grep -n -i $i $x
+        done
+done
