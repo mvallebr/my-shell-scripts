@@ -1,101 +1,159 @@
-
-set nowrap
-set number
+"
+" Description: mvalle's vim file, configuration for several plugins and nice editor options
+" Author: Marcelo Valle
+"=================================================
 syntax on
-set laststatus=2
-set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-set ts=3
-set cindent
-set cino=)3;>3;<3
-set comments=sr:/*,mb:*,el:*/,://
-set formatoptions=croql
-color torte
-set guifont=Courier\ 18
+"open .vim file in current folder if it exists
+set exrc
+set secure "disabling potential problems
+
+"Make it works as other editors reggarding buffers
+set hidden
+
+"=================================================
+" EDITOR options
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+"set noexpandtab
+set expandtab        " expand tabs to spaces
+" wrap lines at 120 chars. 80 is somewhat antiquated with nowadays displays.
+set textwidth=120
+set colorcolumn=120
+" highlight ColorColumn ctermbg=darkgray
+" set UTF-8 encoding
+set enc=utf-8
+set fenc=utf-8
+set termencoding=utf-8
+" disable vi compatibility (emulation of old bugs)
+set nocompatible
+" use indentation of previous line
+set autoindent
+" use intelligent indentation for C
+set smartindent
+" turn syntax highlighting on
+set t_Co=256
+syntax on
+
+set backspace=indent,eol,start
+" colorscheme wombat256
+" turn line numbers on
+set number
+" highlight matching braces
+set showmatch
+" Customize status line
+set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%)
+" intelligent comments
+set comments=sl:/*,mb:\ *,elx:\ */
+" Highlight search word
 set hlsearch
-set tabpagemax=35
-" colorscheme peachpuff
+" wildmenu
+set wildmenu
+set wildignore=*.o,*.a,*.pyc,*.log,*.d,*.dd,*.sundev*,*.tsk
+set wildmode=list:longest,full
 
-let g:colors_name="desert"
-hi Normal	guifg=White guibg=grey20
-hi Cursor	guibg=khaki guifg=slategrey
-hi VertSplit	guibg=#c2bfa5 guifg=grey50 gui=none
-hi Folded	guibg=grey30 guifg=gold
-hi FoldColumn	guibg=grey30 guifg=tan
-hi IncSearch	guifg=slategrey guibg=khaki
-hi ModeMsg	guifg=goldenrod
-hi MoreMsg	guifg=SeaGreen
-hi NonText	guifg=LightBlue guibg=grey30
-hi Question	guifg=springgreen
-hi Search	guibg=peru guifg=wheat
-hi SpecialKey	guifg=yellowgreen
-hi StatusLine	guibg=#c2bfa5 guifg=black gui=none
-hi StatusLineNC	guibg=#c2bfa5 guifg=grey50 gui=none
-hi Title	guifg=indianred
-hi Visual	gui=none guifg=khaki guibg=olivedrab
-hi WarningMsg	guifg=salmon
-" syntax highlighting groups
-hi Comment	guifg=SkyBlue
-hi Constant	guifg=#ffa0a0
-hi Identifier	guifg=palegreen
-hi Statement	guifg=khaki
-hi PreProc	guifg=indianred
-hi Type		guifg=darkkhaki
-hi Special	guifg=navajowhite
-hi Ignore	guifg=grey40
-"hi Error
-hi Todo		guifg=orangered guibg=yellow2
+"=================================================
+" cpp options
+augroup project
+  autocmd!
+  autocmd BufRead,BufNewFile *.h,*.cpp set filetype=cpp.doxygen
+augroup END
 
-" color terminal definitions
-hi SpecialKey	ctermfg=darkgreen
-hi NonText	cterm=bold ctermfg=darkblue
-hi Directory	ctermfg=darkcyan
-hi ErrorMsg	cterm=bold ctermfg=7 ctermbg=1
-hi IncSearch	cterm=NONE ctermfg=yellow ctermbg=green
-hi Search	cterm=NONE ctermfg=grey ctermbg=blue
-hi MoreMsg	ctermfg=darkgreen
-hi ModeMsg	cterm=NONE ctermfg=brown
-hi LineNr	ctermfg=3
-hi Question	ctermfg=green
-hi StatusLine	cterm=bold,reverse
-hi StatusLineNC cterm=reverse
-hi VertSplit	cterm=reverse
-hi Title	ctermfg=5
-hi Visual	cterm=reverse
-hi VisualNOS	cterm=bold,underline
-hi WarningMsg	ctermfg=1
-hi WildMenu	ctermfg=0 ctermbg=3
-hi Folded	ctermfg=darkgrey ctermbg=NONE
-hi FoldColumn	ctermfg=darkgrey ctermbg=NONE
-hi DiffAdd	ctermbg=4
-hi DiffChange	ctermbg=5
-hi DiffDelete	cterm=bold ctermfg=4 ctermbg=6
-hi DiffText	cterm=bold ctermbg=1
-hi Comment	ctermfg=darkcyan
-hi Constant	ctermfg=brown
-hi Special	ctermfg=5
-hi Identifier	ctermfg=6
-hi Statement	ctermfg=3
-hi PreProc	ctermfg=5
-hi Type		ctermfg=2
-hi Underlined	cterm=underline ctermfg=5
-hi Ignore	cterm=bold ctermfg=7
-hi Ignore	ctermfg=darkgrey
-hi Error	cterm=bold ctermfg=7 ctermbg=1
+"=================================================
+" PyMode plugin
+let g:pymode_rope = 0 " https://github.com/klen/python-mode/issues/342
+" let g:pymode_rope = 1
+let g:pymode_doc = 1
+let g:pymode_doc_key = 'K'
+let g:pymode_lint = 1
+let g:pymode_lint_checker = "pyflakes"
+let g:pymode_lint_write = 1
+let g:pymode_virtualenv = 0
+let g:pymode_syntax = 1
+let g:pymode_syntax_all = 1
+let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+let g:pymode_syntax_space_errors = g:pymode_syntax_all
+let g:pymode_folding = 0
+let g:pymode_options_max_line_length = 120
 
-" Fechamento autom.tico de par.nteses
-imap { {}<left>
-imap ( ()<left>
-imap [ []<left>
+"=================================================
+"Pathogen plugin
+filetype off
+call pathogen#infect()
+call pathogen#helptags()
+filetype plugin indent on 
+syntax on
 
-" Remove Ctrl+M do final de linhas do DOS
-" get rid of
-if has("user_commands")
-  " remove ^M from the file
-    com! RemoveCtrlM :%s/^M/\r/g
-  " change to directory of current file
-    com! CD cd %:p:h
+
+"=================================================
+"Solarized plugin 
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+ set background=light
+colorscheme solarized
+let g:solarized_termcolors=256
+syntax enable
+
+"=================================================
+"NERDTree plugin
+" Opens at initialization 
+" autocmd vimenter * NERDTree
+" Opens at initialization only if no files have been specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"Key biding to enable/disable nerd tree
+map <C-n> :NERDTreeToggle<CR>
+" Closes vim if nerdtree window is the last on remaining
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+
+"=================================================
+"OmniCppComplete plugin
+" Install OmniCppComplete like described on http://vim.wikia.com/wiki/C++_code_completion
+" This offers intelligent C++ completion when typing ... .->. or <C-o>
+" Load standard tag files
+set tags+=~/.vim/tags/cpp
+set tags+=~/.vim/tags/gl
+set tags+=~/.vim/tags/sdl
+set tags+=~/.vim/tags/qt4
+
+
+"=================================================
+" Enhanced keyboard mappings
+"
+" in normal mode F2 will save the file
+nmap <F2> :w<CR>
+" in insert mode F2 will exit insert, save, enters insert again
+imap <F2> <ESC>:w<CR>i
+" Be able to paster stuff without problems
+map <F3> :set paste!
+" switch between header/source with F4
+map <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+" goto definition with F12
+map <F12> :set hlsearch!
+
+"=================================================
+" Options for diff mode
+
+" in diff mode we use the spell check keys for merging
+if &diff
+    " diff settings
+    map <M-Down> ]c
+    map <M-Up> [c
+    map <M-Left> do
+    map <M-Right> dp
+    map <F9> :new<CR>:read !svn diff<CR>:set syntax=diff buftype=nofile<CR>gg
+else
+    " spell settings
+    :setlocal spell spelllang=en
+    " set the spellfile - folders must exist
+    set spellfile=~/.vim/spellfile.add
+    map <M-Down> ]s
+    map <M-Up> [s
 endif
 
 
-
-
+"=================================================
